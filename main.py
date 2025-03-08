@@ -14,6 +14,8 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     clock_object = pygame.time.Clock()
     dt = 0
+    score = 0
+
      
     # creating groups before creating a player
     updatable_group = pygame.sprite.Group()
@@ -61,6 +63,8 @@ def main():
                 if shot.collision(asteroid):
                     shot.kill()
                     asteroid.split()
+                    score += 1
+
 
         # render the screen and player
         screen.fill("black")
@@ -72,8 +76,17 @@ def main():
         # isn't automatically handled by Pygame's Group
         for sprite in drawable_group:
             sprite.draw(screen) # draw all sprites in the group of player onto the screen
-        pygame.display.flip()
+        
+        font = pygame.font.SysFont("Arial", 24)
+        score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+        screen.blit(score_text, (10, 10))  # Position in top-left
 
+        pygame.display.flip()
+        
+        '''def draw_score():
+            font = pygame.font.SysFont("Arial", 24)
+            score_text = font.render(f"Score: {score}", True, (255, 255, 255))
+            screen.blit(score_text, (10, 10))  # Position in top-left'''
 
 
 if __name__ == "__main__":
